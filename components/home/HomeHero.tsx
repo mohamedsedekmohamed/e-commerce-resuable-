@@ -28,14 +28,23 @@ export default function HomeHero({ categories = [] }: { categories?: StoreCatego
 
 
   // We don't slice because it's a moving marquee, we can show all valid categories!
-  const validCats = categories.filter(category => category.name.trim().length > 0);
-  const boxes = validCats.map(c => ({ id: c.id, name: c.name, imageSrc: getCategoryImageSrc(c.image) })) 
+  const validCats = categories.filter(
+    (category) => typeof category.name === 'string' && category.name.trim().length > 0
+  );
+  const boxes = validCats.map((category) => ({
+    id: category.id,
+    name: category.name,
+    imageSrc: getCategoryImageSrc(category.image),
+  }));
 
-  // Duplicate items enough times so the marquee never runs out of content on large screens
-  let finalBoxes = [...boxes];
-  while (finalBoxes.length < 8) {
-    finalBoxes = [...finalBoxes, ...boxes];
-  }
+  // Never use a loop that depends on API data: during the initial server
+  // prerender the list is empty, and repeating an empty list would never end.
+  const finalBoxes = boxes.length === 0
+    ? []
+    : Array.from(
+        { length: Math.max(8, boxes.length) },
+        (_, index) => boxes[index % boxes.length]
+      );
 
   return (
     <div className="relative w-full flex flex-col mb-16 lg:mb-24">

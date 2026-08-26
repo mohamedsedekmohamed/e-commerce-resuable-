@@ -4,17 +4,40 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { Toaster } from "react-hot-toast";
 import FloatingWhatsApp from "@/components/shared/FloatingWhatsApp";
+
+const FOOTER_METADATA_REVALIDATE_SECONDS = 3600;
+// Keep this comfortably below Vercel's function limit. The page can use the
+// fallback metadata when the separate backend is slow or temporarily down.
+const FOOTER_METADATA_TIMEOUT_MS = 4_000;
+
+async function getStoreMetadata(locale: string) {
+  const configuredBaseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://ecommerce.mazoom.online/api';
+  const baseUrl = configuredBaseUrl.replace(/\/+$/, '');
+
+  try {
+    const res = await fetch(`${baseUrl}/user/footer?local=${encodeURIComponent(locale)}`, {
+      next: { revalidate: FOOTER_METADATA_REVALIDATE_SECONDS },
+      signal: AbortSignal.timeout(FOOTER_METADATA_TIMEOUT_MS),
+    });
+
+    if (!res.ok) return null;
+
+    return await res.json();
+  } catch {
+    // Metadata must never make the storefront unavailable. The caller uses
+    // default values if the backend cannot respond within the small budget.
+    return null;
+  }
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   let title = "Store";
   let logo1 = "/favicon.ico";
 
-  try {
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://ecommerce.mazoom.online/api';
-    const res = await fetch(`${baseUrl}/user/footer?local=${locale}`, {
-      next: { revalidate: 3600 },
-    });
-    const data = await res.json();
+  const data = await getStoreMetadata(locale);
+
+  if (data) {
     const d = data?.data || data;
     if (d) {
       let bName = d.brand_name;
@@ -29,8 +52,6 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
         logo1 = rawLogo.startsWith('http') ? rawLogo : `https://ecommerce.mazoom.online/storage/${rawLogo.replace(/\\/g, '/')}`;
       }
     }
-  } catch {
-    // The storefront can still render with the default metadata when the API is unavailable.
   }
 
   const description = locale === 'ar' 
