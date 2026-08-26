@@ -19,7 +19,7 @@ export default function HomeFinalCTA() {
     transition: {
       duration: 5,
       repeat: Infinity,
-      ease: "easeInOut"
+      ease: "easeInOut" as const
     }
   };
 
@@ -29,7 +29,7 @@ export default function HomeFinalCTA() {
     transition: {
       duration: 4,
       repeat: Infinity,
-      ease: "easeInOut"
+      ease: "easeInOut" as const
     }
   };
 
