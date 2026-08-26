@@ -1,0 +1,462 @@
+@import "tailwindcss";
+
+html {
+  font-size: 16.5px;
+}
+@media (max-width: 768px) {
+  html {
+    font-size: 17.5px;
+  }
+}
+:root {
+  --background: #ffffff; /* Clean White */
+  --foreground: #111111; /* Sleek Black */
+  --new: #7B2525;
+  --card: #ffffff; /* Pure white */
+  --border: #e4e4e7; /* Clean Light Border */
+  --muted: #f4f4f5; /* Light Gray Muted */
+  --muted-foreground: #52525b; /* Dark Muted Text */
+  --overlay-black: #000000;
+
+  /* Primary Palette (Black) */
+  --color-primary: 17 17 17; /* Normal Black */
+  --color-primary-100: 244 244 245; /* Light */
+  --color-primary-200: 228 228 231; /* Light :hover */
+  --color-primary-300: 212 212 216; /* Light :active */
+  --color-primary-400: 63 63 70; /* Normal :hover */
+  --color-primary-500: 39 39 42; /* Normal :active */
+  --color-primary-600: 24 24 27; /* Dark */
+  --color-primary-700: 17 17 17; /* Dark :hover */
+  --color-primary-800: 10 10 10; /* Dark :active */
+  --color-primary-900: 0 0 0; /* Darker */
+
+  /* Secondary Palette (Yellow #FBC105) */
+  --color-secondary: 251 193 21; /* Normal Yellow #FBC105 */
+  --color-secondary-100: 254 249 225; /* Light Yellow */
+  --color-secondary-200: 253 241 187; /* Light :hover */
+  --color-secondary-300: 252 227 122; /* Light :active */
+  --color-secondary-400: 251 207 50; /* Normal :hover */
+  --color-secondary-500: 251 193 21; /* Normal :active */
+  --color-secondary-600: 225 168 12; /* Dark Yellow */
+  --color-secondary-700: 185 135 10; /* Dark :hover */
+  --color-secondary-800: 145 103 12; /* Dark :active */
+  --color-secondary-900: 115 81 14; /* Darker */
+
+  /* Table / Dashboard tokens */
+  --color-secondary-border: #e4e4e7;
+  --color-one: 17 17 17;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-border: var(--border);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-overlay-black: var(--overlay-black);
+
+  --color-primary: rgb(var(--color-primary));
+  --color-primary-100: rgb(var(--color-primary-100));
+  --color-primary-200: rgb(var(--color-primary-200));
+  --color-primary-300: rgb(var(--color-primary-300));
+  --color-primary-400: rgb(var(--color-primary-400));
+  --color-primary-500: rgb(var(--color-primary-500));
+  --color-primary-600: rgb(var(--color-primary-600));
+  --color-primary-700: rgb(var(--color-primary-700));
+  --color-primary-800: rgb(var(--color-primary-800));
+  --color-primary-900: rgb(var(--color-primary-900));
+
+  --color-secondary: rgb(var(--color-secondary));
+  --color-secondary-100: rgb(var(--color-secondary-100));
+  --color-secondary-200: rgb(var(--color-secondary-200));
+  --color-secondary-300: rgb(var(--color-secondary-300));
+  --color-secondary-400: rgb(var(--color-secondary-400));
+  --color-secondary-500: rgb(var(--color-secondary-500));
+  --color-secondary-600: rgb(var(--color-secondary-600));
+  --color-secondary-700: rgb(var(--color-secondary-700));
+  --color-secondary-800: rgb(var(--color-secondary-800));
+  --color-secondary-900: rgb(var(--color-secondary-900));
+
+  --color-secondary-border: var(--color-secondary-border);
+  --color-one: rgb(var(--color-one));
+
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --breakpoint-2xl: 1200px;
+}
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+
+  @media (width >= 576px) { max-width: 576px; }
+  @media (width >= 768px) { max-width: 768px; }
+  @media (width >= 992px) { max-width: 992px; }
+  @media (width >= 1200px) { max-width: 1200px; }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ══════════════════════════════════════════════
+   PHARMACY DESIGN SYSTEM — VISUAL LANGUAGE
+══════════════════════════════════════════════ */
+
+/* ── Entrance animations — restrained ── */
+@keyframes ph-fadein {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.ph-fadein {
+  animation: ph-fadein 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ── Ticker — pharmacy trust bar ── */
+@keyframes ph-ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-25%); }
+}
+.ph-ticker {
+  animation: ph-ticker 36s linear infinite;
+}
+.ph-ticker-rtl {
+  animation: ph-ticker 36s linear infinite reverse;
+}
+
+/* ── Button transitions ── */
+.ph-btn-primary {
+  transition: background 0.18s ease, color 0.18s ease;
+}
+.ph-btn-primary:hover {
+  background: rgb(var(--color-primary-400)) !important;
+}
+
+.ph-btn-accent {
+  transition: background 0.18s ease;
+}
+.ph-btn-accent:hover {
+  background: rgb(var(--color-secondary-400)) !important;
+}
+
+/* ── Panel link ── */
+.ph-panel-link {
+  transition: background 0.14s ease;
+}
+.ph-panel-link:hover { background: rgba(255,255,255,0.04); }
+
+/* ── Scrollbar ── */
+.ph-hide-scrollbar::-webkit-scrollbar { display: none; }
+.ph-hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ── Product image hover — disciplined ── */
+.ph-product-img {
+  transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.ph-product-img:hover {
+  transform: scale(1.03);
+}
+
+/* ── Trust / rule strip ── */
+.ph-trust-strip {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+/* ── Swiper pagination — small pills ── */
+.ph-swiper .swiper-pagination-bullet {
+  width: 5px !important;
+  height: 5px !important;
+  background-color: rgba(26, 31, 46, 0.2) !important;
+  border-radius: 50% !important;
+  transition: all 0.3s ease !important;
+  opacity: 1 !important;
+}
+.ph-swiper .swiper-pagination-bullet-active {
+  width: 18px !important;
+  border-radius: 2px !important;
+  background-color: rgb(var(--color-primary)) !important;
+}
+.ph-swiper .swiper-pagination-bullets {
+  bottom: 16px !important;
+}
+
+/* ── Category pill: selected ── */
+.ph-cat-active {
+  background: rgb(var(--color-primary));
+  color: #fff;
+  border-color: rgb(var(--color-primary));
+}
+
+/* ── Discount badge — label stock format ── */
+.ph-badge-discount {
+  background: rgb(var(--color-primary));
+  color: rgb(var(--color-secondary));
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  padding: 2px 6px;
+  text-transform: uppercase;
+  border-radius: 0;
+  line-height: 1.6;
+}
+
+/* ── In-stock badge ── */
+.ph-badge-stock {
+  background: rgb(var(--color-primary-100));
+  color: rgb(var(--color-primary));
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 2px 6px;
+  text-transform: uppercase;
+  line-height: 1.6;
+}
+
+/* ── Divider ── */
+.ph-divider {
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── Search input ── */
+.ph-search-input:focus {
+  outline: none;
+  border-color: rgb(var(--color-primary-300));
+  box-shadow: 0 0 0 2px rgba(26, 31, 46, 0.07);
+}
+
+/* ── Nav active underline ── */
+.ph-nav-active-line {
+  background: rgb(var(--color-primary));
+}
+
+/* ── Subtle ruled lines pattern for accent areas ── */
+.ph-label-pattern {
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 4px,
+    rgba(26, 31, 46, 0.025) 4px,
+    rgba(26, 31, 46, 0.025) 5px
+  );
+}
+
+/* ── Hero swiper ── */
+.hero-swiper .swiper-pagination-bullet {
+  width: 5px !important;
+  height: 5px !important;
+  background-color: rgba(26, 31, 46, 0.2) !important;
+  border-radius: 50% !important;
+  transition: all 0.35s ease !important;
+  opacity: 1 !important;
+}
+.hero-swiper .swiper-pagination-bullet-active {
+  width: 18px !important;
+  border-radius: 2px !important;
+  background-color: rgb(var(--color-primary)) !important;
+}
+.hero-swiper .swiper-pagination-bullets {
+  bottom: 16px !important;
+}
+
+/* ── Horizontal scroll edge fade ── */
+.ph-scroll-fade-end {
+  position: relative;
+}
+.ph-scroll-fade-end::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0; bottom: 0;
+  width: 48px;
+  background: linear-gradient(to right, transparent, var(--background));
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ── Product card: flat image area ── */
+.ph-card-img-wrap {
+  overflow: hidden;
+  background: var(--background);
+}
+
+/* ── Nav top bar ── */
+.ph-topbar {
+  background: rgb(var(--color-primary));
+  color: rgba(255,255,255,0.6);
+  font-size: 11px;
+  letter-spacing: 0.02em;
+}
+
+/* ── Category grid tile hover state ── */
+.ph-cat-tile {
+  transition: border-color 0.18s ease;
+}
+.ph-cat-tile:hover {
+  border-color: rgba(26, 31, 46, 0.3);
+}
+
+/* ── Section rule label ── */
+.ph-section-rule {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.ph-section-rule::before {
+  content: '';
+  display: block;
+  width: 2px;
+  height: 1.25rem;
+  background: rgb(var(--color-primary));
+  flex-shrink: 0;
+}
+
+/* ── Footer link hover expand ── */
+.ph-footer-link-line {
+  display: inline-block;
+  width: 0.75rem;
+  height: 1px;
+  background: rgba(255,255,255,0.18);
+  transition: width 0.15s ease, background 0.15s ease;
+  flex-shrink: 0;
+}
+a:hover > .ph-footer-link-line {
+  width: 1.25rem;
+  background: rgb(var(--color-secondary));
+}
+::selection{
+  background-color: rgb(var(--color-primary));
+  color: #fff;
+}
+
+/* ══════════════════════════════════════════════
+   ENCHANTING ANIMATIONS — MAGICAL VISUAL EFFECTS
+══════════════════════════════════════════════ */
+
+/* ── Shimmer sweep — text / element highlight ── */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.ph-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(251, 193, 21, 0.15) 25%,
+    rgba(251, 193, 21, 0.3) 50%,
+    rgba(251, 193, 21, 0.15) 75%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+/* ── Float — gentle hovering for particles ── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-12px) rotate(1deg); }
+  66% { transform: translateY(6px) rotate(-1deg); }
+}
+
+@keyframes float-delayed {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-18px) rotate(2deg); }
+}
+
+/* ── Glow pulse — CTA / accent ── */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(251, 193, 21, 0.0); }
+  50% { box-shadow: 0 0 30px rgba(251, 193, 21, 0.25), 0 0 60px rgba(251, 193, 21, 0.1); }
+}
+.ph-glow-pulse {
+  animation: glow-pulse 2.5s ease-in-out infinite;
+}
+
+/* ── Gradient flow — animated border ── */
+@keyframes gradient-flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.ph-gradient-border {
+  background: linear-gradient(
+    270deg,
+    rgb(var(--color-primary)),
+    rgb(var(--color-secondary)),
+    rgb(var(--color-primary)),
+    rgb(var(--color-secondary))
+  );
+  background-size: 300% 300%;
+  animation: gradient-flow 4s ease infinite;
+}
+
+/* ── Sparkle — floating dots ── */
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1) rotate(180deg); }
+}
+
+/* ── Draw line — underline reveal ── */
+@keyframes draw-line {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+/* ── Curtain wipe — image reveal ── */
+@keyframes curtain-wipe {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+.ph-curtain-reveal {
+  animation: curtain-wipe 1s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+/* RTL curtain */
+.ph-curtain-reveal-rtl {
+  animation: curtain-wipe 1s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  clip-path: inset(0 0 0 100%);
+}
+@keyframes curtain-wipe-rtl {
+  from { clip-path: inset(0 0 0 100%); }
+  to { clip-path: inset(0 0 0 0); }
+}
+.ph-curtain-reveal-rtl {
+  animation: curtain-wipe-rtl 1s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+/* ── Smooth scroll ── */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ── Magnetic hover utility ── */
+.ph-magnetic {
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.ph-magnetic:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+/* ── Particle dot ── */
+.ph-particle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+/* ── Card 3D tilt hover ── */
+.ph-tilt-card {
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease;
+  transform-style: preserve-3d;
+  perspective: 800px;
+}
+.ph-tilt-card:hover {
+  transform: translateY(-6px) rotateX(2deg) rotateY(-2deg);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08), 0 8px 16px rgba(0,0,0,0.04);
+}
