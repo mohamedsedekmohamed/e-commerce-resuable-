@@ -11,7 +11,7 @@ const FOOTER_METADATA_REVALIDATE_SECONDS = 3600;
 const FOOTER_METADATA_TIMEOUT_MS = 4_000;
 
 async function getStoreMetadata(locale: string) {
-  const configuredBaseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://ecommerce.mazoom.online/api';
+  const configuredBaseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://anlatech.mazoom.online/api';
   const baseUrl = configuredBaseUrl.replace(/\/+$/, '');
 
   try {

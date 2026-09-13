@@ -4,7 +4,7 @@ import axios, {
 } from 'axios';
 import Cookies from "js-cookie";
 
-const configuredBaseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://ecommerce.mazoom.online/api/';
+const configuredBaseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://anlatech.mazoom.online/api/';
 const BASE_URL = configuredBaseUrl.endsWith('/') ? configuredBaseUrl : `${configuredBaseUrl}/`;
 // ─── Axios Instance ──────────────────────────────────────────────────────────
 const api: AxiosInstance = axios.create({
