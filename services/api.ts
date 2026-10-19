@@ -4,7 +4,7 @@ import axios, {
 } from 'axios';
 import Cookies from "js-cookie";
 
-const configuredBaseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://anlatech.mazoom.online/api/';
+const configuredBaseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://ecommercebcknd.deluxart.ae/api/';
 const BASE_URL = configuredBaseUrl.endsWith('/') ? configuredBaseUrl : `${configuredBaseUrl}/`;
 // ─── Axios Instance ──────────────────────────────────────────────────────────
 const api: AxiosInstance = axios.create({
@@ -19,7 +19,7 @@ api.interceptors.request.use(
       const requestPath = config.url?.replace(/^\//, '');
       const isAdminRoute = requestPath?.startsWith('admin/');
       const isUserRoute = requestPath?.startsWith('user/');
-      
+
       let token: string | undefined = undefined;
       if (isAdminRoute) {
         token = Cookies.get("admin_token");
@@ -54,7 +54,7 @@ api.interceptors.response.use(
           Cookies.remove("user_token");
           Cookies.remove("user_data");
         }
-        
+
         const pathname = window.location.pathname;
         const firstSegment = pathname.split('/').filter(Boolean)[0];
         const locale = firstSegment === 'ar' || firstSegment === 'en' ? firstSegment : 'en';

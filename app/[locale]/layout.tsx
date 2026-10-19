@@ -11,7 +11,7 @@ const FOOTER_METADATA_REVALIDATE_SECONDS = 3600;
 const FOOTER_METADATA_TIMEOUT_MS = 4_000;
 
 async function getStoreMetadata(locale: string) {
-  const configuredBaseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://anlatech.mazoom.online/api';
+  const configuredBaseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://ecommercebcknd.deluxart.ae/api';
   const baseUrl = configuredBaseUrl.replace(/\/+$/, '');
 
   try {
@@ -54,7 +54,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     }
   }
 
-  const description = locale === 'ar' 
+  const description = locale === 'ar'
     ? 'صيدليتك الإلكترونية الموثوقة. اكتشف أفضل الأدوية الأصيلة، الفيتامينات، المكملات الغذائية، ومستحضرات العناية الشخصية والأجهزة الطبية بأسعار شفافة وتوصيل سريع.'
     : 'Your trusted online pharmacy. Discover authentic medicines, vitamins, health supplements, skincare, personal care products, and medical supplies with transparent pricing and fast delivery.';
 
@@ -68,11 +68,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       template: `%s | ${title}`,
       default: title,
     },
-    description, 
+    description,
     keywords: [
-      "Online Pharmacy", "Medicines", "Vitamins", "Supplements", "Skincare", 
+      "Online Pharmacy", "Medicines", "Vitamins", "Supplements", "Skincare",
       "Personal Care", "Medical Supplies", "Pharmacy Store",
-      "صيدلية أونلاين", "أدوية", "فيتامينات", "مكملات غذائية", "عناية بالبشرة", 
+      "صيدلية أونلاين", "أدوية", "فيتامينات", "مكملات غذائية", "عناية بالبشرة",
       "عناية بالشعر", "أجهزة طبية", "مستلزمات طبية"
     ],
     authors: [{ name: title }],
